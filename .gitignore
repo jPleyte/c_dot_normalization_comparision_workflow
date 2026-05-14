@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Eclipse
+.project
+.pydevproject
+
+# NextFlow
+nextflow/work/**
+nextflow/.nextflow.log.*
+nextflow/.nextflow
+# mac
+.DS_Store
+
