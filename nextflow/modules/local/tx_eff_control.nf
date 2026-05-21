@@ -1,12 +1,13 @@
 process TX_EFF_CONTROL {
+    publishDir "${params.outdir}/tfx", mode: 'symlink'
+
     input:
-    tuple val(meta), path(variants_json), path(annovar_variant_function), path(annovar_exonic_variant_function)            
+    tuple val(meta), path(variants_json), path(annovar_variant_function), path(annovar_exonic_variant_function), path(tfx_src_dir)
     path refseq_ccds_map
     path reference_fasta
     path seqrepo_dir
     val uta_db_url
     val number_of_threads    
-    path tfx_src_dir
 
     output:
     tuple val(meta), path("${meta.id}_tfx_out.json"), emit: tfx

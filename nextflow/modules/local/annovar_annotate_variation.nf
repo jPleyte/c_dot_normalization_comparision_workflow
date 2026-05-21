@@ -2,6 +2,8 @@
 Run annotate_variation.pl to generate annovar.variant_function and annovar.exonic_variant_function
 */
 process ANNOVAR_ANNOTATE_VARIATION {
+    publishDir "${params.outdir}/annovar", mode: 'symlink'
+
     input:
     tuple val(meta), path(avinput) 
     path annovar_dir

@@ -2,9 +2,10 @@
 Convert a csv file to tab delimitted avinput file
 */
 process CSV_TO_JSON {
+    publishDir "${params.outdir}/intermediate", mode: 'symlink'
+    
     input:
-    tuple val(meta), path(csv) 
-    path tfx_src_dir
+    tuple val(meta), path(csv), path(tfx_src_dir)
 
     output:
     tuple val(meta), path("${meta.id}_out.json"), emit: json_file

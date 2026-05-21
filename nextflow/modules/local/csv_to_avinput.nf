@@ -12,6 +12,6 @@ process CSV_TO_AVINPUT {
     script:
     """
     export PYTHONPATH="${src_dir}:\${PYTHONPATH:-}"
-    python ${src_dir}/nomenclature_comparison/annovar/csv_to_avinput.py --in $csv --out ${meta.id}.avinput
+    python ${src_dir}/nomenclature_comparison/transform/csv_to_avinput.py --in $csv --out ${meta.id}.avinput
     """
 }

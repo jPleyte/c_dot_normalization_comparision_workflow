@@ -225,6 +225,7 @@ __marimo__/
 nextflow/work/**
 nextflow/.nextflow.log.*
 nextflow/.nextflow
+nextflow/results
 # mac
 .DS_Store
 
