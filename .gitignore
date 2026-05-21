@@ -229,3 +229,5 @@ nextflow/results
 # mac
 .DS_Store
 
+vscode-workspace.code-workspace
+
