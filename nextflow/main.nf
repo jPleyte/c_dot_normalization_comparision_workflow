@@ -16,6 +16,7 @@ workflow {
         log.info "Variant source: ${params.variant_source_file_csv}"
         log.info "${params.compbio_cgd_tx_eff_src_label_one}: ${params.compbio_cgd_tx_eff_src_dir_one}"
         log.info "${params.compbio_cgd_tx_eff_src_label_two}: ${params.compbio_cgd_tx_eff_src_dir_two}"
+        log.info "${params.compbio_cgd_tx_eff_src_label_three}: ${params.compbio_cgd_tx_eff_src_dir_three}"
 
         ch_variants = channel.fromPath(params.variant_source_file_csv)
             .map { 
@@ -38,14 +39,14 @@ workflow {
 
         ch_tfx_sources = channel.of(
             [ [id: params.compbio_cgd_tx_eff_src_label_one], file(params.compbio_cgd_tx_eff_src_dir_one, checkIfExists: true) ],
-            [ [id: params.compbio_cgd_tx_eff_src_label_two], file(params.compbio_cgd_tx_eff_src_dir_two, checkIfExists: true) ])
+            [ [id: params.compbio_cgd_tx_eff_src_label_two], file(params.compbio_cgd_tx_eff_src_dir_two, checkIfExists: true) ],
+            [ [id: params.compbio_cgd_tx_eff_src_label_three], file(params.compbio_cgd_tx_eff_src_dir_three, checkIfExists: true) ])
 
         // Combine the two inputs: variant list(s) and tfx source directories
         // This creates a channel that looks like 
         // 1. [ variants, [id: 'run_one'], dir_one ]
         // 2. [ variants, [id: 'run_two'], dir_two ]
-        // ch_tfx_inputs = ch_variants.combine(ch_tfx_sources)
-        //     .map { variants, meta, tfx_source_dir -> [ meta, variants, tfx_source_dir ] }
+        // 3. [ variants, [id: 'run_three'], dir_three ]
         ch_tfx_inputs = ch_variants
             .combine(ch_tfx_sources)
             .map { variant_meta, variant_file, tfx_meta, tfx_dir -> 

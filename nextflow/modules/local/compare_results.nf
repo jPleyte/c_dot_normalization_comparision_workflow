@@ -18,7 +18,6 @@ process COMPARE_RESULTS {
         .join(' ')
     """    
     export PYTHONPATH="${src_dir}:\${PYTHONPATH:-}"
-    echo 3
     python ${src_dir}/nomenclature_comparison/compare_results.py ${input_args} --out ${meta.id}_comparison.xlsx
     """
 }
